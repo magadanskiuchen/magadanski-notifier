@@ -2,11 +2,11 @@
 
 // packages
 
+const bodyParser = require('body-parser');
+const config = require('config');
+const crypto = require('crypto');
 const express = require('express');
 const https = require('https');
-const bodyParser = require('body-parser');
-const crypto = require('crypto');
-const config = require('config');
 
 // pull configuration constants
 
@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 	}
 });
 
-app.post('/webhook', function (req, res) {
+app.post('/', function (req, res) {
 	if (req.body.object === 'page') {
 		req.body.entry.forEach(function (entry) {
 			var pageID = entry.id;
@@ -51,7 +51,7 @@ app.post('/webhook', function (req, res) {
 		});
 		
 		res.sendStatus(200);
-  }
+	}
 });
 
 function verifyRequestSignature(req, res, buf) {
@@ -69,7 +69,7 @@ function verifyRequestSignature(req, res, buf) {
 			.digest('hex');
 		
 		if (signatureHash != expectedHash) {
-			throw new Error("Couldn't validate the request signature.\nRequested signature: " + signature + "\nSHA1: " + crypto.createHmac('sha1', APP_SECRET) + "\nBuf: " + buf + "\nExpected signature: " + expectedHash);
+			throw new Error("Couldn't validate the request signature.\nRequested signature: " + signatureHash + "\nExpected signature: " + expectedHash);
 		}
 	}
 }
