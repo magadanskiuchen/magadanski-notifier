@@ -65,7 +65,7 @@ function verifyRequestSignature(req, res, buf) {
 			.digest('hex');
 		
 		if (signatureHash != expectedHash) {
-			throw new Error("Couldn't validate the request signature. Requested signature: " + elements + "Expected signature: " + APP_SECRET);
+			throw new Error("Couldn't validate the request signature.\nRequested signature: " + signature + "\nExpected signature: " + APP_SECRET);
 		}
 	}
 }
