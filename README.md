@@ -1,2 +1,3 @@
-# magadanski-notifier
+# Magadanski Notifier
+
 Facebook Messenger Bot
