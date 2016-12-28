@@ -38,4 +38,4 @@ jspm_packages
 
 ##################
 
-config/config.json
+config/development.json
