@@ -23,6 +23,7 @@
   "homepage": "https://github.com/magadanskiuchen/magadanski-notifier#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "crypto": "0.0.3",
     "express": "^4.14.0",
     "https": "^1.0.0"
   }
