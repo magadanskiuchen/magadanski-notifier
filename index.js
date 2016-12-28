@@ -60,12 +60,12 @@ function verifyRequestSignature(req, res, buf) {
 		var method = elements[0];
 		var signatureHash = elements[1];
 		
-		var expectedHash = crypto.createHmac('sha1', APP_SECRET)
+		var expectedHash = crypto.createHmac(method, APP_SECRET)
 			.update(buf)
 			.digest('hex');
 		
 		if (signatureHash != expectedHash) {
-			throw new Error("Couldn't validate the request signature.\nRequested signature: " + signature + "\nExpected signature: " + APP_SECRET);
+			throw new Error("Couldn't validate the request signature.\nRequested signature: " + signature + "\nSHA1: " + crypto.createHmac('sha1', APP_SECRET) + "\nBuf: " + buf + "\nExpected signature: " + expectedHash);
 		}
 	}
 }
