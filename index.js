@@ -7,7 +7,7 @@ const crypto = require('crypto');
 const config = require('config');
 
 var app = express();
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
@@ -65,7 +65,7 @@ function verifyRequestSignature(req, res, buf) {
 			.digest('hex');
 		
 		if (signatureHash != expectedHash) {
-			throw new Error("Couldn't validate the request signature.");
+			throw new Error("Couldn't validate the request signature.\nRequested signature hash: " + signatureHash + "\nExpected signature hash: " + expectedHash);
 		}
 	}
 }
