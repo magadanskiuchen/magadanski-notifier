@@ -1,0 +1,27 @@
+{
+  "name": "magadanski-notifier",
+  "version": "1.0.0",
+  "description": "Facebook Messenger Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magadanskiuchen/magadanski-notifier.git"
+  },
+  "keywords": [
+    "magadanski",
+    "notifier",
+    "facebook"
+  ],
+  "author": "Georgi Popov <magadanski_uchen@yahoo.com> (http://magadanski.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/magadanskiuchen/magadanski-notifier/issues"
+  },
+  "homepage": "https://github.com/magadanskiuchen/magadanski-notifier#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
