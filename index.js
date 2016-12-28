@@ -1,5 +1,7 @@
 'use strict';
 
+// packages
+
 const express = require('express');
 const https = require('https');
 const bodyParser = require('body-parser');
@@ -7,17 +9,19 @@ const bodyParser = require('body-parser');
 const xhub = require('express-x-hub');
 const config = require('config');
 
-var app = express();
-app.set('port', (process.env.PORT || 5000));
-app.listen(app.get('port'));
-app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
-app.use(bodyParser.json());
-app.use(express.static('public'));
+// pull configuration constants
 
 const APP_SECRET = (process.env.NOTIFIER_APP_SECRET) ? process.env.NOTIFIER_APP_SECRET : config.get('appSecret');
 const VALIDATION_TOKEN = (process.env.NOTIFIER_VALIDATION_TOKEN) ? (process.env.NOTIFIER_VALIDATION_TOKEN) : config.get('validationToken');
 const PAGE_ACCESS_TOKEN = (process.env.NOTIFIER_PAGE_ACCESS_TOKEN) ? (process.env.NOTIFIER_PAGE_ACCESS_TOKEN) : config.get('pageAccessToken');
 const SERVER_URL = (process.env.SERVER_URL) ? (process.env.SERVER_URL) : config.get('serverURL');
+
+var app = express();
+app.set('port', (process.env.PORT || 5000));
+app.listen(app.get('port'));
+app.use(xhub({ algorithm: 'sha1', secret: APP_SECRET }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
 
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
 	console.error("Missing config values");
