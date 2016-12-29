@@ -7,6 +7,7 @@ const config = require('config');
 const crypto = require('crypto');
 const express = require('express');
 const https = require('https');
+const request = require('request');
 
 // pull configuration constants
 
