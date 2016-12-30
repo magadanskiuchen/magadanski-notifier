@@ -90,19 +90,15 @@ function receivedMessage(event) {
 	
 	if (messageText) {
 		switch (messageText) {
-			case 'generic':
-			sendGenericMessage(senderID);
-			break;
-		
-		default:
-			sendTextMessage(senderID, messageText);
+			default:
+				search(senderID, messageText);
 		}
 	} else if (messageAttachments) {
 		sendTextMessage(senderID, "Message with attachment received");
 	}
 }
 
-function sendGenericMessage(recipientId) {
+function search(recipientId, searchTerms) {
 	sendTextMessage(recipientId, 'This is a response to a message of "generic"');
 }
 

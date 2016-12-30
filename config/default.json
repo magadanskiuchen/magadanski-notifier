@@ -2,5 +2,7 @@
 	"appSecret": "",
 	"pageAccessToken": "",
 	"validationToken": "",
-	"serverURL": ""
+	"serverURL": "",
+	"wpAppUser": "",
+	"wpAppPassword": ""
 }
