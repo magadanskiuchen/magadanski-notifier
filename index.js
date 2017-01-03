@@ -120,8 +120,8 @@ function search(recipientId, searchTerms) {
 				messageData.message.buttons = [];
 				
 				for (var i = 0; i < response.length; i++) {
-					var title = JSON.parse(body)[i].post_title;
-					var url = JSON.parse(body)[i].guid;
+					var title = response[i].post_title;
+					var url = response[i].guid;
 					
 					messageData.message.buttons.push({
 						type: 'web_url',
