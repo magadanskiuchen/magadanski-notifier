@@ -104,26 +104,32 @@ function search(recipientId, searchTerms) {
 		method: 'GET'
 	}, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-			var response = JSON.parse(body);
+			var results = JSON.parse(body);
 			
 			var messageData = {
 				recipient: {
 					id: recipientId
 				},
 				message: {
-					text: ''
+					attachment: {
+						type: 'template',
+						payload: {
+							template_type: 'button',
+							text: ''
+						}
+					}
 				}
 			};
 			
-			if (response.length) {
-				messageData.message.text = `"${searchTerms}" се съдържа в следните статии:`;
-				messageData.message.buttons = [];
+			if (results.length) {
+				messageData.message.attachment.payload.text = `"${searchTerms}" се съдържа в следните статии:`;
+				messageData.message.attachment.payload.buttons = [];
 				
-				for (var i = 0; i < response.length; i++) {
-					var title = response[i].post_title;
-					var url = response[i].guid;
+				for (var i = 0; i < results.length; i++) {
+					var title = results[i].post_title;
+					var url = results[i].guid;
 					
-					messageData.message.buttons.push({
+					messageData.message.attachment.payload.buttons.push({
 						type: 'web_url',
 						url: url,
 						title: title
