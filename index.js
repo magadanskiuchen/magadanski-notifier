@@ -104,16 +104,36 @@ function search(recipientId, searchTerms) {
 		method: 'GET'
 	}, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-			var results = [];
+			var response = JSON.parse(body);
 			
-			for (var i = 0; i < JSON.parse(body).length; i++) {
-				var title = JSON.parse(body)[i].post_title;
-				var url = JSON.parse(body)[i].guid;
+			var messageData = {
+				recipient: {
+					id: recipientId
+				},
+				message: {
+					text: ''
+				}
+			};
+			
+			if (response.length) {
+				messageData.message.text = `"${searchTerms}" се съдържа в следните статии:`;
+				messageData.message.buttons = [];
 				
-				results.push(`<a href="${url}">${title}</a>`);
+				for (var i = 0; i < .length; i++) {
+					var title = JSON.parse(body)[i].post_title;
+					var url = JSON.parse(body)[i].guid;
+					
+					messageData.message.buttons.push({
+						type: 'web_url',
+						url: url,
+						title: title
+					});
+				}
+			} else {
+				messageData.message.text = `Търсене за "${searchTerms}" не доведе до никакви резултати`;
 			}
 			
-			sendTextMessage(recipientId, results.join(' '));
+			callSendAPI(messageData);
 		} else {
 			console.error("Unable to query server.");
 			console.error(response);
