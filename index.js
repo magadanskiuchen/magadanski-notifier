@@ -180,5 +180,3 @@ app.listen(app.get('port'), function () {
 });
 
 module.exports = app;
-
-search(1437452540, 'WordPress');
