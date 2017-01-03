@@ -119,7 +119,7 @@ function search(recipientId, searchTerms) {
 				messageData.message.text = `"${searchTerms}" се съдържа в следните статии:`;
 				messageData.message.buttons = [];
 				
-				for (var i = 0; i < .length; i++) {
+				for (var i = 0; i < response.length; i++) {
 					var title = JSON.parse(body)[i].post_title;
 					var url = JSON.parse(body)[i].guid;
 					
