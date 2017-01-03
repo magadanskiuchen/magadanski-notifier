@@ -117,13 +117,13 @@ function search(recipientId, searchTerms) {
 			
 			if (response.length) {
 				messageData.message.text = `"${searchTerms}" се съдържа в следните статии:`;
-				messageData.buttons = [];
+				messageData.message.buttons = [];
 				
 				for (var i = 0; i < response.length; i++) {
 					var title = response[i].post_title;
 					var url = response[i].guid;
 					
-					messageData.buttons.push({
+					messageData.message.buttons.push({
 						type: 'web_url',
 						url: url,
 						title: title
