@@ -99,7 +99,27 @@ function receivedMessage(event) {
 }
 
 function search(recipientId, searchTerms) {
-	sendTextMessage(recipientId, 'This is a response to a message of "generic"');
+	request({
+		uri: 'http://magadanski.com/wp-json/mf/v1/search/' + encodeURIComponent(searchTerms),
+		method: 'GET'
+	}, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			var results = [];
+			
+			for (var i = 0; i < JSON.parse(body).length; i++) {
+				var title = JSON.parse(body)[i].post_title;
+				var url = JSON.parse(body)[i].guid;
+				
+				results.push(`<a href="${url}">${title}</a>`);
+			}
+			
+			sendTextMessage(recipientId, results.join(' '));
+		} else {
+			console.error("Unable to query server.");
+			console.error(response);
+			console.error(error);
+		}
+	});
 }
 
 function sendTextMessage(recipientId, messageText) {
@@ -140,3 +160,5 @@ app.listen(app.get('port'), function () {
 });
 
 module.exports = app;
+
+search(1437452540, 'WordPress');
